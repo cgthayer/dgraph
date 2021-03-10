@@ -32,12 +32,12 @@ import (
 	"github.com/pkg/errors"
 )
 
-// getAuthToken gets the auth token from by logging into the cluster.
-func getAuthToken() (*api.Jwt, error) {
+// getAccessJwt gets the access jwt token from by logging into the cluster.
+func getAccessJwt() (*api.Jwt, error) {
 	user := Upgrade.Conf.GetString(user)
 	password := Upgrade.Conf.GetString(password)
 	header := http.Header{}
-	header.Set("X-Dgraph-AuthToken", Upgrade.Conf.GetString("auth-token"))
+	header.Set("X-Dgraph-AuthToken", Upgrade.Conf.GetString(authToken))
 	updateSchemaParams := &GraphQLParams{
 		Query: `mutation login($userId: String, $password: String, $namespace: Int) {
 			login(userId: $userId, password: $password, namespace: $namespace) {

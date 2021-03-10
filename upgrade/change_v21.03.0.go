@@ -134,7 +134,7 @@ func upgradeCORS() error {
 	dg, cb := x.GetDgraphClient(Upgrade.Conf, true)
 	defer cb()
 
-	jwt, err := getAuthToken()
+	jwt, err := getAccessJwt()
 	if err != nil {
 		return errors.Wrap(err, "while getting jwt auth token")
 	}
